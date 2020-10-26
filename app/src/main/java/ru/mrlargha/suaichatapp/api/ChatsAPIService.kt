@@ -1,10 +1,7 @@
 package ru.mrlargha.suaichatapp.api
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import ru.mrlargha.suaichatapp.models.*
 
 interface ChatsAPIService {
@@ -17,10 +14,10 @@ interface ChatsAPIService {
     @GET("/chats/myChats")
     fun getMyChats(@Header("Authorization") token: String): Call<List<Chat>>
 
-    @GET("/chats/messages")
+    @GET("/chats/getMessages")
     fun getMessages(
         @Header("Authorization") token: String,
-        @Body body: GetMessagesPayload
+        @Query("chatId") chatId: Long
     ): Call<List<ChatMessage>>
 
     @POST("/chats/sendMessage")

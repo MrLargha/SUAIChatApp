@@ -1,8 +1,12 @@
 package ru.mrlargha.suaichatapp
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -25,6 +29,16 @@ class ChatHostActivity : AppCompatActivity() {
                 R.id.navigation_chats, R.id.navigation_users, R.id.navigation_profile
             )
         )
+
+        navController.addOnDestinationChangedListener {
+                _: NavController, navDestination: NavDestination, _: Bundle? ->
+                if (navDestination.id == R.id.chatFragment) {
+                    navView.visibility = GONE
+                } else {
+                    navView.visibility = VISIBLE
+                }
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

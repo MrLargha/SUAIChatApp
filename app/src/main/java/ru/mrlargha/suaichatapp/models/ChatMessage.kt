@@ -1,3 +1,5 @@
 package ru.mrlargha.suaichatapp.models
 
-class ChatMessage
+import java.util.*
+
+data class ChatMessage(val chat: Chat, val user: User, val content: String, val date: Date)

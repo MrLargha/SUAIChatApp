@@ -17,6 +17,7 @@
             android:layout_height="35dp"
             android:layout_marginStart="16dp"
             android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
@@ -55,6 +56,13 @@
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    tools:text="18:10" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,4 @@
 package ru.mrlargha.suaichatapp.models
 
-class SendMessagePayload {
+class SendMessagePayload(val chatId: Long, val message: String) {
 }

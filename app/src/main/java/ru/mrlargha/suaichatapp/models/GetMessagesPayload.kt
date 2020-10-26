@@ -1,4 +1,3 @@
 package ru.mrlargha.suaichatapp.models
 
-class GetMessagesPayload {
-}
+data class GetMessagesPayload(val chatId: Long)
