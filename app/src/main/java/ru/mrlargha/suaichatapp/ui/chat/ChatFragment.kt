@@ -38,7 +38,7 @@ class ChatFragment : Fragment() {
             activity?.getSharedPreferences("SP", Context.MODE_PRIVATE)?.getString("token", "-")
 
         binding.apply {
-            messagesRecycler.layoutManager = LinearLayoutManager(context)
+            messagesRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
 
             sendMessage.setOnClickListener {
                 if (!messageInput.text.isNullOrBlank()) {
@@ -53,7 +53,7 @@ class ChatFragment : Fragment() {
                             ) {
                                 response.body()?.let {
                                     (binding.messagesRecycler.adapter as ChatMessagesAdapter).apply {
-                                        messages.add(it)
+                                        messages.add(0, it)
                                         notifyDataSetChanged()
                                     }
                                 }
@@ -65,6 +65,7 @@ class ChatFragment : Fragment() {
                             }
                         }
                     )
+                    messageInput.text?.clear()
                 }
             }
 
@@ -79,7 +80,7 @@ class ChatFragment : Fragment() {
                 ) {
                     response.body()?.let {
                         binding.messagesRecycler.adapter =
-                            ChatMessagesAdapter(it.toMutableList(), 1)
+                            ChatMessagesAdapter(it.reversed().toMutableList(), 1)
                     }
                 }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearance.SUAIChatApp.CardStyle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SUAIChatApp.CutBottomLeft" parent="ShapeAppearance.SUAIChatApp.CardStyle">
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SUAIChatApp.CutBottomRight" parent="ShapeAppearance.SUAIChatApp.CardStyle">
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SUAIChatApp.MessageCardLeft" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SUAIChatApp.CutBottomLeft</item>
+    </style>
+
+    <style name="ShapeAppearance.SUAIChatApp.MessageCardRight" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SUAIChatApp.CutBottomRight</item>
+    </style>
+</resources>
