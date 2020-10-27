@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +32,7 @@ class ChatFragment : Fragment() {
     @Inject
     lateinit var chatsRepository: ChatsRepository
     private val navArgs: ChatFragmentArgs by navArgs()
+    private var oldMessages: List<ChatMessage> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +43,8 @@ class ChatFragment : Fragment() {
             activity?.getSharedPreferences("SP", Context.MODE_PRIVATE)?.getString("token", "-")
 
         binding.apply {
-            messagesRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
+            messagesRecycler.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
 
             sendMessage.setOnClickListener {
                 if (!messageInput.text.isNullOrBlank()) {
@@ -71,24 +77,33 @@ class ChatFragment : Fragment() {
 
         }
 
+        lifecycleScope.launch {
+            while (true) {
+                chatsRepository.apiService.getMessages(token!!, navArgs.chatId).enqueue(
+                    object : Callback<List<ChatMessage>> {
+                        override fun onResponse(
+                            call: Call<List<ChatMessage>>,
+                            response: Response<List<ChatMessage>>
+                        ) {
+                            response.body()?.let {
+                                if (oldMessages.isEmpty() ||
+                                    oldMessages.last() != it.last() ||
+                                    (oldMessages.isEmpty() && it.isNotEmpty())) {
+                                    binding.messagesRecycler.adapter =
+                                        ChatMessagesAdapter(it.reversed().toMutableList(), 1)
+                                    oldMessages = it
+                                }
+                            }
+                        }
 
-        chatsRepository.apiService.getMessages(token!!, navArgs.chatId).enqueue(
-            object : Callback<List<ChatMessage>> {
-                override fun onResponse(
-                    call: Call<List<ChatMessage>>,
-                    response: Response<List<ChatMessage>>
-                ) {
-                    response.body()?.let {
-                        binding.messagesRecycler.adapter =
-                            ChatMessagesAdapter(it.reversed().toMutableList(), 1)
+                        override fun onFailure(call: Call<List<ChatMessage>>, t: Throwable) {
+                            Toast.makeText(context, t.localizedMessage, Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
-
-                override fun onFailure(call: Call<List<ChatMessage>>, t: Throwable) {
-                    Toast.makeText(context, t.localizedMessage, Toast.LENGTH_SHORT).show()
-                }
+                )
+                delay(1000)
             }
-        )
+        }
 
         return binding.root
     }
