@@ -49,7 +49,7 @@ class LoginActivity : NetworkActivity() {
                     {
                         Toast.makeText(
                             this@LoginActivity,
-                            "Error! ${it.networkResponse.statusCode}",
+                            "Error! $it",
                             Toast.LENGTH_SHORT
                         ).show()
                     })

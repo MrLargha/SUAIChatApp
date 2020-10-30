@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
@@ -45,10 +47,14 @@ class ChatsListFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<Chat>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_LONG).show()
                 }
 
             })
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(ChatsListFragmentDirections.actionNavigationChatsToCreateChatFragment())
         }
 
         return binding.root

@@ -30,13 +30,15 @@ class ChatHostActivity : AppCompatActivity() {
             )
         )
 
-        navController.addOnDestinationChangedListener {
-                _: NavController, navDestination: NavDestination, _: Bundle? ->
-                if (navDestination.id == R.id.chatFragment) {
-                    navView.visibility = GONE
-                } else {
-                    navView.visibility = VISIBLE
-                }
+        navController.addOnDestinationChangedListener { _: NavController, navDestination: NavDestination, _: Bundle? ->
+            if (navDestination.id in setOf(
+                    R.id.navigation_chats, R.id.navigation_users, R.id.navigation_profile
+                )
+            ) {
+                navView.visibility = VISIBLE
+            } else {
+                navView.visibility = GONE
+            }
         }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
