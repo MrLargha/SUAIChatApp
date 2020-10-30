@@ -16,6 +16,9 @@ class CreateChatFragment : Fragment() {
     ): View? {
         val binding = FragmentCreateChatBinding.inflate(inflater, container, false)
 
+        binding.apply {
+
+        }
 
         return binding.root
     }
