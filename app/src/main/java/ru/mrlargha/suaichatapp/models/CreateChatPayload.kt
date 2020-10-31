@@ -1,4 +1,3 @@
 package ru.mrlargha.suaichatapp.models
 
-class CreateChatPayload {
-}
+data class CreateChatPayload(val chatName: String, val usersIds: List<Long>)

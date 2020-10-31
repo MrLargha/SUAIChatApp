@@ -1,23 +1,37 @@
 package ru.mrlargha.suaichatapp.ui.create_chat
 
-package ru.mrlargha.suaichatapp.ui.users
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.mrlargha.suaichatapp.databinding.SelectableUserViewBinding
 import ru.mrlargha.suaichatapp.databinding.UserViewBinding
 import ru.mrlargha.suaichatapp.models.User
 
-class UsersSelectableAdapter(private val users: List<User>) :
+class UsersSelectableAdapter(
+    private val users: List<User>,
+    private val selectionChangedCallback: (users: List<User>) -> Unit
+) :
     RecyclerView.Adapter<UsersSelectableAdapter.UserViewHolder>() {
 
-//    var onUser
+    private val selectedUsers = mutableListOf<User>()
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        var binding = SelectableUserViewBinding.bind(itemView)
+
+        init {
+            binding.addCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    selectedUsers.add(users[adapterPosition])
+                } else {
+                    selectedUsers.remove(users[adapterPosition])
+                }
+                selectionChangedCallback.invoke(selectedUsers)
+            }
+        }
+
         fun bind(user: User) {
-            val binding = UserViewBinding.bind(itemView)
-
             binding.apply {
                 binding.username.text = user.firstName + " " + user.lastName
             }
@@ -26,7 +40,7 @@ class UsersSelectableAdapter(private val users: List<User>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         UserViewHolder(
-            UserViewBinding.inflate(
+            SelectableUserViewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import ru.mrlargha.suaichatapp.R
 import ru.mrlargha.suaichatapp.databinding.UserViewBinding
 import ru.mrlargha.suaichatapp.models.User
 
@@ -17,6 +19,13 @@ class UsersAdapter(private val users: List<User>) :
             binding.apply {
                 binding.username.text = user.firstName + " " + user.lastName
             }
+
+            Picasso.get().load("http://fspobot.tw1.ru:8080/profile/getImage/${user.avatarName}")
+                .error(
+                    R.drawable.profile
+                )
+                .into(binding.userAvatar)
+
         }
     }
 
