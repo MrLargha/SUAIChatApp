@@ -74,11 +74,7 @@ class CreateChatFragment : Fragment() {
                     ).enqueue(object : Callback<Chat> {
                         override fun onResponse(call: Call<Chat>, response: Response<Chat>) {
                             response.body()?.let {
-                                findNavController().navigate(
-                                    CreateChatFragmentDirections.actionCreateChatFragmentToChatFragment(
-                                        it.id
-                                    )
-                                )
+                                    // TODO: Navigate to chat fragment and pass the created chat id as an argument
                             }
                         }
 

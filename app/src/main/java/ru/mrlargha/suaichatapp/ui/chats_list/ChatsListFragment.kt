@@ -54,7 +54,7 @@ class ChatsListFragment : Fragment() {
         }
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(ChatsListFragmentDirections.actionNavigationChatsToCreateChatFragment())
+            // TODO: Implement navigation to create chat fragment
         }
 
         return binding.root

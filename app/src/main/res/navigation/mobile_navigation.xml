@@ -9,14 +9,7 @@
         android:id="@+id/navigation_chats"
         android:name="ru.mrlargha.suaichatapp.ui.chats_list.ChatsListFragment"
         android:label="Чаты"
-        tools:layout="@layout/fragment_chats_list" >
-        <action
-            android:id="@+id/action_navigation_chats_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
-            android:id="@+id/action_navigation_chats_to_createChatFragment"
-            app:destination="@id/createChatFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_chats_list" />
 
     <fragment
         android:id="@+id/navigation_users"
@@ -42,10 +35,5 @@
         android:id="@+id/createChatFragment"
         android:name="ru.mrlargha.suaichatapp.ui.create_chat.CreateChatFragment"
         android:label="fragment_create_chat"
-        tools:layout="@layout/fragment_create_chat" >
-        <action
-            android:id="@+id/action_createChatFragment_to_chatFragment"
-            app:destination="@id/chatFragment"
-            app:popUpTo="@id/navigation_chats" />
-    </fragment>
+        tools:layout="@layout/fragment_create_chat" />
 </navigation>

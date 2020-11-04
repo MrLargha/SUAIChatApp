@@ -15,8 +15,7 @@ class ChatsAdapter(private val chats: List<Chat>) :
 
         init {
             itemView.setOnClickListener {
-                val action = ChatsListFragmentDirections.actionNavigationChatsToChatFragment(chats[adapterPosition].id)
-                itemView.findNavController().navigate(action)
+                // TODO: Navigate to chat fragment and pass chat id as an argument
             }
         }
 

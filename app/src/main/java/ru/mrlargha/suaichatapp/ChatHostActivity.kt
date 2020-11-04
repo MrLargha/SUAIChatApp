@@ -45,8 +45,6 @@ class ChatHostActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        findNavController(R.id.nav_host_fragment).navigateUp()
-        return true
-    }
+    // TODO: Handle on back pressed
+
 }
