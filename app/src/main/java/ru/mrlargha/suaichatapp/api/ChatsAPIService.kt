@@ -20,6 +20,9 @@ interface ChatsAPIService {
         @Query("chatId") chatId: Long
     ): Call<List<ChatMessage>>
 
+    @GET("/profile/getInfoAboutMe")
+    fun getInfoAboutMe(@Header("Authorization") token: String) : Call<User>
+
     @POST("/chats/sendMessage")
     fun sendMessage(@Header("Authorization") token: String, @Body body: SendMessagePayload) : Call<ChatMessage>
 
