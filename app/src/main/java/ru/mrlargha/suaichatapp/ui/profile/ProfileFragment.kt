@@ -60,13 +60,13 @@ class ProfileFragment : Fragment() {
                          "_user_${user?.id}" + uri.lastPathSegment,
                          RequestBody.create(MediaType.get("multipart/form-data"), byteArray)
                      )
-                 ).enqueue(object : Callback<Any> {
-                     override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                 ).enqueue(object : Callback<Void> {
+                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                          Toast.makeText(context, "Updated successfully", Toast.LENGTH_SHORT)
                              .show()
                      }
 
-                     override fun onFailure(call: Call<Any>, t: Throwable) {
+                     override fun onFailure(call: Call<Void>, t: Throwable) {
                          Toast.makeText(context, "Error: ${t.localizedMessage}", Toast.LENGTH_SHORT)
                              .show()
                      }

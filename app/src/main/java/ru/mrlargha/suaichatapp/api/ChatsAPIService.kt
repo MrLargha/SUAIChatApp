@@ -29,6 +29,6 @@ interface ChatsAPIService {
 
     @Multipart
     @POST("/profile/uploadProfileImage")
-    fun uploadProfileImage(@Header("Authorization") token: String, @Part image: MultipartBody.Part) : Call<Any>
+    fun uploadProfileImage(@Header("Authorization") token: String, @Part image: MultipartBody.Part) : Call<Void>
 
 }
