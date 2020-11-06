@@ -51,13 +51,13 @@ class ProfileFragment : Fragment() {
             }
              token?.let {
                  val stream = ByteArrayOutputStream()
-                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                  val byteArray: ByteArray = stream.toByteArray()
                  chatsRepository.apiService.uploadProfileImage(
                      it,
                      MultipartBody.Part.createFormData(
                          "file",
-                         "_user_${user?.id}" + uri.lastPathSegment,
+                         "_user_${user?.id}" + uri.lastPathSegment + ".jpg",
                          RequestBody.create(MediaType.get("multipart/form-data"), byteArray)
                      )
                  ).enqueue(object : Callback<Void> {
@@ -73,8 +73,6 @@ class ProfileFragment : Fragment() {
 
                  })
              }
-
-
         }
 
     private val requestPermissionLauncher =

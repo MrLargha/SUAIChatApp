@@ -6,6 +6,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ru.mrlargha.suaichatapp.databinding.MessageViewBinding
 import ru.mrlargha.suaichatapp.models.ChatMessage
 
@@ -31,12 +32,11 @@ class ChatMessagesAdapter(val messages: MutableList<ChatMessage>, private val us
                     otherUserImage.visibility = VISIBLE
                     messageCard.visibility = GONE
                     messageCardOther.visibility = VISIBLE
-
+                    Picasso.get().load("http://fspobot.tw1.ru:8080/profile/getImage/${message.user.avatarName}").into(otherUserImage)
                     messageContentOther.text = message.content
                     authorOther.text = message.user.firstName + " " + message.user.lastName
                     dateOther.text = message.date.toString()
                 }
-
             }
         }
     }
