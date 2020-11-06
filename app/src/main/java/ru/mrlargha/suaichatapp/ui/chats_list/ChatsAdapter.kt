@@ -3,6 +3,7 @@ package ru.mrlargha.suaichatapp.ui.chats_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.mrlargha.suaichatapp.databinding.ChatViewBinding
@@ -15,7 +16,9 @@ class ChatsAdapter(private val chats: List<Chat>) :
 
         init {
             itemView.setOnClickListener {
-                // TODO: Navigate to chat fragment and pass chat id as an argument
+                Navigation.findNavController(it)
+                    .navigate(ChatsListFragmentDirections.actionNavigationChatsToChatFragment(chats[adapterPosition].id))
+
             }
         }
 

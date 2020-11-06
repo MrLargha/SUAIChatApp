@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -45,6 +46,8 @@ class ChatHostActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    // TODO: Handle on back pressed
-
+    override fun onSupportNavigateUp(): Boolean {
+        Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigateUp()
+        return true
+    }
 }

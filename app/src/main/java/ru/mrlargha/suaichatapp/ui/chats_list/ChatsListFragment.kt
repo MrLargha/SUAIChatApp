@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +55,7 @@ class ChatsListFragment : Fragment() {
         }
 
         binding.floatingActionButton.setOnClickListener {
-            // TODO: Implement navigation to create chat fragment
+            Navigation.findNavController(binding.root).navigate(ChatsListFragmentDirections.actionNavigationChatsToCreateChatFragment())
         }
 
         return binding.root

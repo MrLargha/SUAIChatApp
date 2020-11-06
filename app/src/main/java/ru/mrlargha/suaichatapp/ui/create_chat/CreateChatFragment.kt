@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,7 @@ class CreateChatFragment : Fragment() {
                     ).enqueue(object : Callback<Chat> {
                         override fun onResponse(call: Call<Chat>, response: Response<Chat>) {
                             response.body()?.let {
-                                    // TODO: Navigate to chat fragment and pass the created chat id as an argument
+                                Navigation.findNavController(binding.root).navigate(CreateChatFragmentDirections.actionCreateChatFragmentToChatFragment(it.id))
                             }
                         }
 
