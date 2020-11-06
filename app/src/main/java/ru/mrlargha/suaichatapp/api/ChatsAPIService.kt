@@ -1,5 +1,6 @@
 package ru.mrlargha.suaichatapp.api
 
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 import ru.mrlargha.suaichatapp.models.*
@@ -25,5 +26,9 @@ interface ChatsAPIService {
 
     @POST("/chats/sendMessage")
     fun sendMessage(@Header("Authorization") token: String, @Body body: SendMessagePayload) : Call<ChatMessage>
+
+    @Multipart
+    @POST("/profile/uploadProfileImage")
+    fun uploadProfileImage(@Header("Authorization") token: String, @Part image: MultipartBody.Part) : Call<Any>
 
 }
